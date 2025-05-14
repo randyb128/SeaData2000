@@ -1,2 +1,11 @@
 # SeaData2000
+Source code repository for the SeaData 2000 marine interface board
+## What is SeaData2000
+SeaData2000 is a NMEA 2000 capable interface board based on an Arduino ESP32 module.  The board provides many pluggable features that can be used in a multitude of applications on any vessel.
+## History
+The board development stems from an issue I had with a brand new RayMarine Element 12S GPS chart plotter.  Unbeknownst to me, this chart plotter has a known issue where the internal GPS signal appears to drop out unexpectedly.  If for instance you had selected a waypoint heading, the unit will occasionly claim the GPS signal is lost and the heading would been gone!  This issue would happen many times per day and is very annoying and even outright dangerous at times. The RayMarine engineers blamed it on mounting location of the 12S but mine is exposed to the sky on a fiberglass sailboat.  Searching the web, may users have this same issue with the Element series of chart plotters from RayMarine.  I have over 20 years experience with different GPS modules and IMHO I believe there's a software bug in the Raymarine Element series that they don't want to or can't address.  Raymarine's solution is to purchace a NMEA 2000 GPS antenna and use that NMEA 2000 data as the source for the 12S as opposed to the internal GPS.  The Raymarine NMEA 2000 GPS module is the RS150 and is over $300 USD and needs to be mounted and wired to NMEA2000 bus.  I decided that I could build a NMEA 2000 GPS device that could also be used for other things on the boat.  I wanted to measure some temperatures and possibly control some outputs.  I also thought it would be nice to have a digital compass heading and while I was at it why not a gyro to get the attitude of the boat. I thought why not share what I've done with others so here you go.
+## Design Specs
+The SeaData2000 is based on an ESP32 WROOM Arduino module.  This provides both Bluetooth BLE and WiFi capabalities.  The design concept is based on off the shelf modules that can be plugged onto the board as required depending on your application.  This allows the SeaData2000 to be very efficient from a power standpoint has you only populate the modules you need for your application(s).  The main processor module is an ESP32 WROOM
 Example code for the SeaData2000 NMEA interface
+
+
