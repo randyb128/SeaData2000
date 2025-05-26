@@ -8,5 +8,6 @@ The board development stems from an issue I had with a brand new RayMarine Eleme
 The SeaData2000 is based on an ESP32 WROOM Arduino module.  This provides both Bluetooth BLE and WiFi capabalities.  In the design, the idea was to keep power costs and power consumption down.  You can select which pluggable modules you want to use for your application depneding on your design requirements.  concept is based on off the shelf modules that can be plugged onto the board as required depending on your application.  This allows the SeaData2000 to be very efficient from a power standpoint has you only populate the modules you need for your application(s).  The main processor module is an ESP32 WROOM
 Example code for the SeaData2000 NMEA interface
 | Syntax | Description |
+| ------ | ----------- |
 
 
