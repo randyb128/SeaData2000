@@ -1,1 +1,2 @@
-This is the library folder
+# Libraries for the SeaData2000 Board
+
