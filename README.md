@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/1fff31f3-08f2-4bcb-b4b6-2b95033f4b4e)# SeaData2000 ⛵
+# SeaData2000 ⛵
 Source code repository for the SeaData 2000 marine interface board
 ## What is SeaData2000
 SeaData2000 is a NMEA 2000 capable interface board based on an Arduino ESP32 module.  The board provides many pluggable features that can be used in a multitude of applications on any vessel.
