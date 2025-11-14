@@ -19,6 +19,10 @@ Example code for the SeaData2000 NMEA interface is based on the library by Timo 
 > When opening the Arduino IDE, you may be prompted that there are new libraries that can be updated.  Please do not click update.  There is no guarantee that it can be compiled, run, etc..
 
 
+## Debugging Code :debug:
+Code can be debugged using the built-in Serial Monitor of the Arduino IDE and using the Serial.print() and Serial.println() methods. This works well when connected to the ESP32 via a micro USB cable but you can also use MQTT to debug.  MQTT is  a very light weight publish/subscribe machine to machine protocol.  In our case, we'll use the built-in WiFi of the ESP32 on the SeaData2000 board to communicate with an app on our phone running an MQTT client.  There are many different clients available but one of the best one's we've found is "IoT MQTT Panel".  This is available for both Android and iPhone and is pretty simple to setup and use.  There's a free version with advertisements and a Pro version which is ad free.  One of the nice features of this version is, you can import preconfigured settings.  We've gone ahead and setup panels for debugging all of the different modules that are available on the Seadata2000 board.  There's even a panel to control a NMEA2000 auto-pilot such as a Raymarine Evolution.  You can download the pre-configured settings here 
+
+
 | Syntax | Description |
 | ------ | ----------- |
 
