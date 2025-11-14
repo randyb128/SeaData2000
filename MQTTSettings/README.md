@@ -8,7 +8,7 @@ Click on "Restore" and select the downloaded file from your downloads. Next, you
   <img src=".github/Connections.jpg" alt="Main Screen" width="200"/>
 </div>
 Click on the pencil (edit) and change the broker address from 192.168.0.195 to the IP address of your Seadata2000 board.  The port should be defaulted correctly to 1883 and the network protocol is "TCP".  The Client Id doesn't matter and can be left blank.
-<div align="center" markdown="1">
+<div align="left" markdown="1">
   <img src=".github/ScreenShot_connection.jpg" alt="Settings Screenshot" width="200"/>
 </div>
-
+When you're all done, click "Save" and if you have an example program running on your SeaData2000 board that ends in MQTT, you should be able to see the corresponding data on the panel of the IoT MQTT app.
