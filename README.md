@@ -1,3 +1,7 @@
+<div align="center" markdown="1">
+  <img src=".github/ScreenShot_connection.jpg" alt="Settings Screenshot" width="100"/>
+</div>
+
 # SeaData2000 ⛵
 Source code repository for the SeaData 2000 marine interface board
 ## What is SeaData2000
