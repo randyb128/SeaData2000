@@ -6,4 +6,4 @@ The SeaData2000 board supports multiple Dallas DS18B20 temperature probes.  DS18
 </div>
 
 # Source Code
-- 
+** TempSimple ** - this example requires at least one temperature probe to be attached to one of the 2 sets of screw terminals.  There is a dependency of the DS2482 library by Joe Young and our DSTemp library.  Temperature readings default to Celsius degrees by you can set the class property "fahrenheit" to "true" if desired.  
