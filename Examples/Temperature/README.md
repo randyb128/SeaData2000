@@ -8,7 +8,7 @@ The SeaData2000 board supports multiple Dallas DS18B20 temperature probes.  DS18
 # Source Code
 **Notes for all** 
 - all the examples requires at least one temperature probe to be attached to one of the 2 sets of screw terminals.
-- there is a dependency of the DS2482 library by Joe Young and our DSTemp library.  This should already be in your Arduino Home\Libraries folder.
+- there is a dependency of the DS2482 library by Joe Young and our DSTemp library.  This should already be in your Arduino Home\Libraries folder if you followed our Quick Start guide.
 - temperature readings default to Celsius degrees but you can set "fahrenheit" bool to "true" if desired in the DSTemp instantiated class.
 - device serial numbers are sorted so they will always be in the same order no matter how they maybe discovered.  This can be overidden by setting "sortList" to "false" in the DSTemp instantiated class.
 - the DSTemp temperature library source code supports up to 6 temperature probes but that can easily be changed in the code by editting the $Your Arduino Home Dir\libraries\DSTemp\DSTemp.h and increasing the MAXID value. 
