@@ -1,5 +1,5 @@
 # SeaData2000 Temperature Examples
-The SeaData2000 board supports multiple Dallas DS18B20 temperature probes.  DS18B20 probes like the one's pictured below are readily available from Amazon or other offshore suppliers usually for around $2-3 USD each.  There are 2 sets of screw terminals for 2 individual temperature probes but temperature probes can be wired in parallel.  The temperature probes require no extra modules to be installed.   
+The SeaData2000 board supports multiple Dallas DS18B20 temperature probes.  DS18B20 probes like the one's pictured below are readily available from Amazon or other offshore suppliers usually for around $2-3 USD each with a 1 metre (3 foot) cable.  There are 2 sets of screw terminals for 2 individual temperature probes but temperature probes can be wired in parallel.  The temperature probes require no extra modules to be installed.   
 
 <div align="left" markdown="1">
   <img src=".github/TempProbe.jpg" alt="Temperature Probe" width="200"/>
