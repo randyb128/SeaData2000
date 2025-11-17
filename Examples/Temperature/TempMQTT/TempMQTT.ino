@@ -9,6 +9,12 @@
 //
 #include <PicoMQTT.h>
 #include <Wire.h>
+#include <WiFi.h>
+
+// uncomment to create a WiFi access point in which you can connect your phone's WiFi
+// otherwise, we'll connect to an existing WiFi access point
+//#define WIFI_ACCESS_POINT
+
 #include "DSTemp.h"   // SeaData Dallas One Wire temperature library
 
 #define I2Cadr 0x18   //base address of DS2482
@@ -16,11 +22,11 @@
 DSTemp dsTemp(I2Cadr);  // create our temperature object
 
 #ifndef WIFI_SSID
-#define WIFI_SSID "TheMudgkins"
+#define WIFI_SSID "YourSSID"
 #endif
 
 #ifndef WIFI_PASSWORD
-#define WIFI_PASSWORD "1mudgkins2"
+#define WIFI_PASSWORD "YourPassword"
 #endif
 
 PicoMQTT::Server mqtt;
@@ -39,12 +45,22 @@ void setup() {
     Serial.println(dsTemp.lastError);
   }
 
-  // Connect to WiFi
-  Serial.printf("Connecting to WiFi %s\n", WIFI_SSID);
+#ifdef WIFI_ACCESS_POINT
+  // Create WiFi Access Point
+  WiFi.mode(WIFI_AP);
+  WiFi.softAP(WIFI_SSID, WIFI_PASSWORD);
+  delay(2000);
+  IPAddress ip = WiFi.softAPIP();
+  Serial.print("WiFi server IP: ");
+  Serial.println(ip);
+#else
+  // Connect to existing WiFi Access Point
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   while (WiFi.status() != WL_CONNECTED) { delay(1000); }
+  delay(2000);
   Serial.printf("WiFi connected, IP: %s\n", WiFi.localIP().toString().c_str());
+#endif
 
   // Subscribe to a topic and attach a callback
   mqtt.subscribe("#", [](const char * topic, const char * payload) {

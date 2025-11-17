@@ -5,7 +5,8 @@
   "r" - restore the module back to default settings.  Nmea 0183 output at 9600 baud on most modules.
   "b" - change just the baud rate from 9600 to 115200
   "c" - configure the module for UBX binary protocol at 115200 baud and 10 samples per second
-
+  Commands are issued via the Serial Monitor command line
+  
   rb - May 14,2025
 */
 
