@@ -18,4 +18,8 @@ The SeaData2000 board supports multiple Dallas DS18B20 temperature probes.  DS18
 - the DSTemp "numTemp" property is the number of discovered temperature devices.
 
 **TempSimple**
-  - this test example display on the serial monitor console the 
+  - this test example simply displays temperature on the serial monitor console
+  - once per second the 1st and 2nd temperature found is displayed with the human readable DS18B20 serial number
+
+**TempMQTT**
+  - this test example 
