@@ -6,9 +6,10 @@ These example sketches are for the NMEA 2000 autopilot.  The autopilot consists 
   <img src=".github/keyfob.jpg" alt="Key Fob" width="200"/>
 </div>
 
-## RCSwitchSend
+## Example RCSwitchSend
 
-This example sketch is used to program the key fob pictured above.  It uses the Serial Monitor command line to program the FOB.  The commands are as follows:
+This example sketch uses the RCSwitch library which should be already in your libraries folder if you followed the setup guide.  
+This sketch is used to program the key fob pictured above.  It uses the Serial Monitor command line to program the FOB.  The commands are as follows:
 - 'N' prompts to enter starting code number
 - 'A' - continuously transmits code number
 - 'B' - transmits code number + 1
@@ -33,6 +34,23 @@ The flat head type FOB is now ready for programming.
   
 Programming the FOB's is pretty much the same for each type that we've seen.  Enter your starting code number using the "n" command from the Serial Monitor (Ctrl + Shift + M from the Arduino IDE or else Tools / Serial Monitor). For example, enter 14000 for the starting code number.  Use the Serial Monitor to select say "a" to program the A button of the FOB.  The serial monitor will repeatedly display "Sending code key A code 14000".  Hold the FOB within 1 inch (3 cm) of the transmitter antenna. Hold down the 'A' button until the LED on the FOB blinks continuously.  Usually takes about 5 seconds.  Now when you press the 'A' button, the LED should blink continously.  Enter 'B' from the serial monitor, present the FOB and press and hold the 'B' button.  Repet for the C and D buttons.
 
+You can use the RCSwitchReceive sketch to confirm your programming worked.  Remember to remove the transmitter module when done programming your FOB's.
+
+## Example RCSwitchReceive
+
+This example sketch uses the RCSwitch library which should be already in your libraries folder if you followed the setup guide.  
+This sketch displays the code value, bit length and protocol of the FOB when a button is pressed.
+
+**Special NOTE!** To get better range, an antenna should be soldered onto the 433mhz receiver module.  The receiver module seems to work within a few feet without an antenna.
+
+
+## Example ESP32EvoPilotRemote
+
+This sketch is a fork of the github page of AK-Homberger [Evo RayMarine Remote Pilot](https://github.com/AK-Homberger/ESP32-Evo-Remote-Pilot-NMEA2000).  This uses the RCSwitch library and the NMEA2000 library to control a RayMarine Ev1 auto-pilot.  The the 'A' button on the 4 button remote is -1 degree, the 'B' button is +1 degree, 'C' button is -10 degrees and the 'D' button is +10 degrees.  We've changed the key codes starting on line 51 of ESP32EvoPilotRemote.ino to start at 14000 as per the programming FOB example above.
+
+## Example ESP32EvoPilotRemoteMQTT
+
+This sketch is the same as ESP32EvoPilotRemote but also supports MQTT.  You can use the Iot MQTT Panel app to control the auto-pilot from the AutoPilot panel of that phone.
 
 
 
