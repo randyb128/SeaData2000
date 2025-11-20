@@ -10,11 +10,24 @@
   'F' - transmits code number + 5
   NOTE: You must solder on an antenna to the 433mhz transmitter module in order to program fobs
 
+  NOTE: You don't want to purchase a rolling code style FOB but when that mentions cloning for copying.
+  
+  If you purchase your FOBs on Amazon, some of the vendors provide instructions on how to program the FOB.
+  Here's what we've found works for 2 different styles of FOBs we purchased from both Amazon and off shore sources.
+
   To program a FOB with your new codes, you must first clear out the existing codes.
-  To clear the codes, start by holding A & B buttons at the same time until the LED flashes.
+  They're many FOBs that look a like.  At the time of this writing, we've seen 2 different types of FOBs.  
+  They look identical (see our README.md in the AutoPilot section for an image) but one distinguishing feature we've seen is the buttons.  There are 2 styles of buttons, flat and pan head.
+
+  For pan head style FOBs, start by holding A & B buttons at the same time until the LED flashes.
   Next, release only the B button and press it 3 times.  The LED should blink.
   Release the A button.
-  Now when you press any of the A-D buttons, the LED will not light.  The FOB is now ready for programming.
+  Now when you press any of the A-D buttons, the LED will not light.  The pan head type FOB is now ready for programming.
+
+  For flat head button style FOBs, press the A & B buttons at the same time until the LED starts flashing continuously.
+  Release both the A & B buttons.
+  Now when you press any of the A-D buttons, the LED will light, but for less than one second.
+  The flat head type FOB is now ready for programming.
   
   Run this sketch, enter your desired code using the "N" command then use the A-D command to select the button to program.
   The sketch will continuously send the selected button code sequence.  
