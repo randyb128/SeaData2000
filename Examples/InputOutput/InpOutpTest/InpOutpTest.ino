@@ -1,10 +1,8 @@
 /*
-  SeaData 2000 Input/Output Test module  rb Sept 3,2025
+  SeaData 2000 Input/Output Test module  rb July 3,2025
 
-  Commands are: 'N' prompts to enter starting code number
+  Commands are: 
   'R' - turn on/off red LED
-  'Y' - turn on/off yellow LED
-  'G' - turn on/off green LED
   '1' - turn on/off relay 1
   '2' - turn on/off relay 2
 
@@ -16,17 +14,15 @@ const int inputs[] = { 26, 27, 35, 34 };
 #define IN_LEN  (sizeof(inputs)/sizeof(inputs[0]))
 
 #define   LED_RED     2
-#define   LED_YELLOW  4
-#define   LED_GREEN   5
 
 #define   RELAY1      32
 #define   RELAY2      33
 
-const char cmds[] = { 'R', 'Y', 'G', '1', '2' };
-const uint8_t outputs[] = { LED_RED, LED_YELLOW, LED_GREEN, RELAY1, RELAY2 };
-String names[] = { "Red LED", "Yellow LED", "Green LED", "Relay 1", "Relay 2" };
+const char cmds[] = { 'R', '1', '2' };
+const uint8_t outputs[] = { LED_RED, RELAY1, RELAY2 };
+String names[] = { "Red LED", "Relay 1", "Relay 2" };
 // initial state of outputs as well as tracking of on/off
-bool state[] = { false, false, false, true, true };
+bool state[] = { false, true, true };
 
 #define OUT_LEN (sizeof(outputs)/sizeof(outputs[0]))
 

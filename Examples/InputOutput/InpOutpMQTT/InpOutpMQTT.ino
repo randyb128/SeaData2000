@@ -1,9 +1,9 @@
 /*
-  SeaData 2000 Input/Output Test module  rb Sept 3,2025
+  SeaData 2000 Input/Output Test module  rb July 3,2025
   MQTT publish to 
-  output/led/chan0  payload "true or 1" turns on LED otherwise off
-  output/relay/chan0 payload "true or 1" turns on 1st Relay
-  output/relay/chan1 payload "true or 1" turns on 2nd Relay
+  output/led/chan0  payload "true" turns on LED otherwise off
+  output/relay/chan0 payload "true" turns on 1st Relay
+  output/relay/chan1 payload "true" turns on 2nd Relay
 
   subscribe to
   input/volts/chanX - sends channel X input in volts where X is 0-3
@@ -35,8 +35,6 @@ const int inputs[] = { 26, 27, 35, 34 };
 #define IN_LEN  (sizeof(inputs)/sizeof(inputs[0]))
 
 #define   LED_RED     2
-#define   LED_YELLOW  4
-#define   LED_GREEN   5
 
 #define   RELAY1      32
 #define   RELAY2      33
@@ -71,6 +69,11 @@ void handler_relay(const char * topic, const char * payload)
     digitalWrite(outputs[chan], strcmp(payload, "true") != 0);
 }
 
+void handler_auto(const char * topic, const char * payload) 
+{
+    Serial.printf("Handler auto received message in topic '%s': %s\n", topic, payload);
+}
+
 void setup() {
   Serial.begin(115200);
   while(! Serial);    // wait for serial port
@@ -102,6 +105,7 @@ void setup() {
   // subscribe to relay and led messages
   mqtt.subscribe("output/led/#", handler_led);
   mqtt.subscribe("output/relay/#", handler_relay);
+  mqtt.subscribe("auto/#", handler_auto);
 
   mqtt.begin();
   last_publish_time = millis();

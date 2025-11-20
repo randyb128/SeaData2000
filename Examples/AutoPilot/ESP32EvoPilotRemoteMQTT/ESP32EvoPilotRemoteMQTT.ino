@@ -44,6 +44,11 @@
 #define WIFI_PASSWORD "YourPassword"
 #endif
 
+// uncomment this line to create your own WiFi server for MQTT
+// you'll need to connect your MQTT client app to this SSID and password if uncommented
+// otherwise, the ESP32 will attempt to connect to your boats WiFi network SSID defined above
+//#define WIFI_SERVER
+
 PicoMQTT::Server mqtt;
 
 #define ESP32_RCSWITCH_PIN GPIO_NUM_25  // Set RCSWITCH port to 15 (RXB6 receiver)

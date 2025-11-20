@@ -17,7 +17,7 @@ This sketch uses the serial console to test the inputs and outputs.  It displays
 
 ## InpOutMQTT Example
 
-This sketch uses the IoT MQTT phone app to test and inputs and outputs.  Open the IoT MQTT app and select the Input/Output panel.  This if you publish to:
+This sketch uses the IoT MQTT phone app to test and inputs and outputs.  Open the IoT MQTT app and select the Input/Output panel.  You can publish to:
 - output/led/chan0  payload "true" turns on LED otherwise off
 - output/relay/chan0 payload "true" turns on 1st Relay otherwise off
 - output/relay/chan1 payload "true" turns on 2nd Relay othrwises off
@@ -25,5 +25,7 @@ This sketch uses the IoT MQTT phone app to test and inputs and outputs.  Open th
 You can subscribe to:
 - input/volts/chanX - sends channel X input in volts where X is 0-3
 - input/raw/chanX   - sends channel X input in raw readings where X is 0-3
+
+
 
 
