@@ -14,7 +14,7 @@ We haven't used the card as of yet in any sketch in an actual boat, but the hard
 
 ## SDRamTest Example
 
-We've provided this example sketch to prove the SDRam card and the hardware.  This sketch uses the built-in ESP32 SD.h card library which I believe is limited to Fat32 which has a maximum capacity of 32gb and has some other limitations like 8.3 filenames (8 character name and 3 character extension).  You may want to checkout the mySD library [here](https://github.com/sfambach/MySD) for a more robust version of SD.h
+We've provided this example sketch to prove the SDRam card and the hardware are working.  This sketch uses the built-in ESP32 SD.h card library which I believe is limited to Fat32 which has a maximum capacity of 32gb and has some other limitations like 8.3 filenames (8 character name and 3 character extension).  You may want to checkout the mySD library [here](https://github.com/nhatuan84/esp32-micro-sdcard) for a more robust version of SD.h
 
 If you're going to use the SDRam card in your watercraft, we'd recommend a dab of hot glue to hold the card into the slot once you've completed programming of the SeaData2000 board.
 
