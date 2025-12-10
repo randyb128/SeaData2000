@@ -14,11 +14,11 @@
 #include <WiFi.h>
 
 #ifndef WIFI_SSID
-#define WIFI_SSID "TheMudgkins"
+#define WIFI_SSID "YourSSID"
 #endif
 
 #ifndef WIFI_PASSWORD
-#define WIFI_PASSWORD "1mudgkins2"
+#define WIFI_PASSWORD "YourPassword"
 #endif
 
 // uncomment this line to create your own WiFi server for MQTT
@@ -31,13 +31,13 @@ PicoMQTT::Server mqtt;
 unsigned long last_publish_time = 0;
 
 // input GPIO assignments
-const int inputs[] = { 26, 27, 35, 34 };
+const int inputs[] = { 32, 33, 35, 34 };
 #define IN_LEN  (sizeof(inputs)/sizeof(inputs[0]))
 
 #define   LED_RED     2
 
-#define   RELAY1      32
-#define   RELAY2      33
+#define   RELAY1      26
+#define   RELAY2      27
 
 const uint8_t outputs[] = { LED_RED, RELAY1, RELAY2 };
 String names[] = { "Red LED", "Relay 1", "Relay 2" };
