@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Management;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,10 +25,10 @@ namespace RecordData
         private bool CaptureFlag = false;
         private XYZ Totals = new XYZ();
         private int CurrentAvgs = 25;
-        private List<int> CaptureValueY = new List<int>();
-        private List<int> CaptureValueZ = new List<int>();
+        private List<string> CaptureList = new List<string>();
         private string LastLine = string.Empty;
         private List<string> Lines = new List<string>();
+        private List<string> MagReadings = new List<string>();
 
         public frmMain()
         {
@@ -72,10 +74,10 @@ namespace RecordData
             btnClose.Enabled = en;
             btnRefresh.Enabled = !en;
             cboPort.Enabled = !en;
-            btnDelete.Enabled = en;
             btnCapture.Enabled = en;
             cboCaptureType.Enabled = !en;
-            btnDelete.Enabled = en;
+            if (CurrentType == CaptureType.Magnetometer)
+                btnDelete.Visible = ! en;
         }
         private void btnOpen_Click(object sender, EventArgs e)
         {
@@ -85,6 +87,7 @@ namespace RecordData
             {
                 serialPort.PortName = portName;
                 serialPort.Open();
+                serialPort.DataReceived += serialPort_DataReceived;
             }
             catch (Exception ex)
             {
@@ -103,6 +106,7 @@ namespace RecordData
             {
                 try
                 {
+                    serialPort.DataReceived -= serialPort_DataReceived;
                     serialPort.Close();
                 }
                 catch { }
@@ -136,53 +140,79 @@ namespace RecordData
             txtOutput.AppendText(text);
             ScrollToEnd(txtOutput);
         }
+        private void UpdateReadings(string text)
+        {
+            bool okToDisplay = true;
+            if (CurrentType == CaptureType.Accelerometer)
+                btnCapture.Enabled = true;
+            else
+            {
+                MagReadings.Add(text);
+                okToDisplay = MagReadings.Count % 10 == 0;
+                    
+            }
+            if (okToDisplay)
+            {
+                lstReadings.Items.Add(text);
+                lstReadings.TopIndex = lstReadings.Items.Count - 1;
+            }
+        }
+
 
         private void serialPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
             string s = serialPort.ReadExisting();
-
-            txtOutput.Invoke(new UpdateTextCallback(this.UpdateOutput), s);
+            txtOutput.BeginInvoke(new UpdateTextCallback(this.UpdateOutput), s);
             if (CaptureFlag)
             {
                 if (Lines.Count > 0)
                 {
                     if (CurrentType == CaptureType.Accelerometer)
                     {
-                        foreach(string str in Lines)
+                        foreach (string str in Lines)
                         {
                             if (str.StartsWith("a:\t"))
                             {
                                 Totals.Add(str);
-                                if (Totals.Count >= CurrentAvgs)     // capture X readings for the average
+                                if (Totals.Count >= CurrentAvgs)
                                 {
-                                    txtReadings.AppendText(Totals.Average());
-                                    Totals.Clear();
+                                    lstReadings.BeginInvoke(new UpdateTextCallback(this.UpdateReadings), Totals.Average());
                                     CaptureFlag = false;
-                                    btnCapture.Enabled = true;
                                     break;
                                 }
                             }
                         }
                     }
-                    Lines.Clear();
+                    else
+                    {
+                        foreach (string str in Lines)
+                        {
+                            if (str.StartsWith("m:\t"))
+                            {
+                                lstReadings.BeginInvoke(new UpdateTextCallback(this.UpdateReadings), str.Substring(3));
+                            }
+                        }
+                    }
                 }
             }
         }
 
         private void btnCapture_Click(object sender, EventArgs e)
         {
+            Totals.Clear();
+            Lines.Clear();
             CurrentType = (CaptureType)cboCaptureType.SelectedIndex;
             if (CurrentType == CaptureType.Accelerometer)
             {
-                CurrentAvgs = atoi(txtAvgs.Text);
-                if (CurrentAvgs <= 0 || CurrentAvgs > 99)
-                    CurrentAvgs = 25;
+                txtAvgs_TextChanged(null, null);        // set the starting averages for Accelerometer
+                btnCapture.Enabled = false;
             }
-            Totals.Clear();
-            Lines.Clear();
+            else
+            {
+
+            }
             CaptureFlag = true;
 
-            btnCapture.Enabled = false;
         }
 
         /// <summary>
@@ -232,7 +262,9 @@ namespace RecordData
 
             public string Average()
             {
-                return string.Format("{0}\t{1}\t{2}\r\n", X / Count, Y / Count, Z / Count);
+                string Result = string.Format("{0}\t{1}\t{2}", X / Count, Y / Count, Z / Count);
+                this.Clear();
+                return Result;
             }
         }
 
@@ -240,25 +272,50 @@ namespace RecordData
         {
             DateTime now = DateTime.Now;
             string fileName = string.Format(@"{0}_{1}_{2}.txt", (CaptureType)cboCaptureType.SelectedIndex == CaptureType.Accelerometer ? "Accel" : "Mag", now.ToString("yyyyMMdd"), now.ToString("HHmmss"));
-            bool fileErr = false;
+            bool fileErr = true;
             try
             {
-                if (txtReadings.Lines.Length == 0)
+                if (MagReadings.Count == 0)
                     MessageBox.Show("No data to be saved");
                 else
+                {
                     using (StreamWriter sw = new StreamWriter(fileName))
                     {
-                        foreach(string line in txtReadings.Lines)
+                        foreach (string line in MagReadings)
                             sw.WriteLine(line);
                     }
+                    fileErr = false;
+                }
             }
             catch(Exception x)
             {
                 MessageBox.Show(x.Message);
-                fileErr = true;
             }
             if (!fileErr)
-                MessageBox.Show(string.Format("Readings saved to {0}", fileName));
+                MessageBox.Show(string.Format("{0} readings saved to {1}", MagReadings.Count, fileName));
+        }
+
+        private void txtAvgs_TextChanged(object sender, EventArgs e)
+        {
+            if (CurrentType == CaptureType.Accelerometer)
+            {
+                CurrentAvgs = atoi(txtAvgs.Text);
+                if (CurrentAvgs <= 0 || CurrentAvgs > 99)
+                {
+                    MessageBox.Show("Invalid average entry, using 25");
+                    CurrentAvgs = 25;
+                }
+            }
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            btnClose_Click(null, null);
+        }
+
+        private void cboCaptureType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CurrentType = (CaptureType)cboCaptureType.SelectedIndex;
         }
     }
 }

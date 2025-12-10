@@ -35,7 +35,6 @@
             this.txtAvgs = new System.Windows.Forms.TextBox();
             this.lblAvgs = new System.Windows.Forms.Label();
             this.btnSaveReadings = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.btnCapture = new System.Windows.Forms.Button();
             this.cboCaptureType = new System.Windows.Forms.ComboBox();
             this.lblCaptureType = new System.Windows.Forms.Label();
@@ -45,10 +44,12 @@
             this.btnOpen = new System.Windows.Forms.Button();
             this.cboPort = new System.Windows.Forms.ComboBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.lblReadings = new System.Windows.Forms.Label();
-            this.txtReadings = new System.Windows.Forms.TextBox();
-            this.lblOutput = new System.Windows.Forms.Label();
+            this.lstReadings = new System.Windows.Forms.ListBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtOutput = new System.Windows.Forms.TextBox();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -59,6 +60,8 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.statusStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -66,6 +69,7 @@
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -76,8 +80,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 450);
-            this.splitContainer1.SplitterDistance = 143;
+            this.splitContainer1.Size = new System.Drawing.Size(1075, 489);
+            this.splitContainer1.SplitterDistance = 105;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 0;
             // 
             // grpSettings
@@ -85,7 +90,6 @@
             this.grpSettings.Controls.Add(this.txtAvgs);
             this.grpSettings.Controls.Add(this.lblAvgs);
             this.grpSettings.Controls.Add(this.btnSaveReadings);
-            this.grpSettings.Controls.Add(this.btnDelete);
             this.grpSettings.Controls.Add(this.btnCapture);
             this.grpSettings.Controls.Add(this.cboCaptureType);
             this.grpSettings.Controls.Add(this.lblCaptureType);
@@ -94,55 +98,53 @@
             this.grpSettings.Controls.Add(this.btnClose);
             this.grpSettings.Controls.Add(this.btnOpen);
             this.grpSettings.Controls.Add(this.cboPort);
-            this.grpSettings.Location = new System.Drawing.Point(15, 12);
+            this.grpSettings.Location = new System.Drawing.Point(20, 15);
+            this.grpSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpSettings.Name = "grpSettings";
-            this.grpSettings.Size = new System.Drawing.Size(782, 116);
+            this.grpSettings.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpSettings.Size = new System.Drawing.Size(1043, 107);
             this.grpSettings.TabIndex = 23;
             this.grpSettings.TabStop = false;
             this.grpSettings.Text = " Settings";
             // 
             // txtAvgs
             // 
-            this.txtAvgs.Location = new System.Drawing.Point(351, 80);
+            this.txtAvgs.Location = new System.Drawing.Point(468, 69);
+            this.txtAvgs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtAvgs.Name = "txtAvgs";
-            this.txtAvgs.Size = new System.Drawing.Size(100, 20);
+            this.txtAvgs.Size = new System.Drawing.Size(132, 22);
             this.txtAvgs.TabIndex = 18;
+            this.txtAvgs.Text = "25";
+            this.txtAvgs.TextChanged += new System.EventHandler(this.txtAvgs_TextChanged);
             // 
             // lblAvgs
             // 
             this.lblAvgs.AutoSize = true;
-            this.lblAvgs.Location = new System.Drawing.Point(293, 83);
+            this.lblAvgs.Location = new System.Drawing.Point(391, 73);
+            this.lblAvgs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAvgs.Name = "lblAvgs";
-            this.lblAvgs.Size = new System.Drawing.Size(52, 13);
+            this.lblAvgs.Size = new System.Drawing.Size(66, 16);
             this.lblAvgs.TabIndex = 17;
             this.lblAvgs.Text = "Averages";
             // 
             // btnSaveReadings
             // 
-            this.btnSaveReadings.Location = new System.Drawing.Point(631, 78);
+            this.btnSaveReadings.Location = new System.Drawing.Point(720, 65);
+            this.btnSaveReadings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSaveReadings.Name = "btnSaveReadings";
-            this.btnSaveReadings.Size = new System.Drawing.Size(102, 23);
+            this.btnSaveReadings.Size = new System.Drawing.Size(136, 28);
             this.btnSaveReadings.TabIndex = 16;
             this.btnSaveReadings.Text = "Save Readings";
             this.btnSaveReadings.UseVisualStyleBackColor = true;
             this.btnSaveReadings.Click += new System.EventHandler(this.btnSaveReadings_Click);
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(540, 78);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(85, 23);
-            this.btnDelete.TabIndex = 15;
-            this.btnDelete.Text = "Remove Last";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            // 
             // btnCapture
             // 
             this.btnCapture.Enabled = false;
-            this.btnCapture.Location = new System.Drawing.Point(459, 78);
+            this.btnCapture.Location = new System.Drawing.Point(612, 66);
+            this.btnCapture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCapture.Name = "btnCapture";
-            this.btnCapture.Size = new System.Drawing.Size(75, 23);
+            this.btnCapture.Size = new System.Drawing.Size(100, 28);
             this.btnCapture.TabIndex = 14;
             this.btnCapture.Text = "Capture";
             this.btnCapture.UseVisualStyleBackColor = true;
@@ -155,25 +157,29 @@
             this.cboCaptureType.Items.AddRange(new object[] {
             "Accelerometer",
             "Magnetometer"});
-            this.cboCaptureType.Location = new System.Drawing.Point(89, 80);
+            this.cboCaptureType.Location = new System.Drawing.Point(119, 69);
+            this.cboCaptureType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboCaptureType.Name = "cboCaptureType";
-            this.cboCaptureType.Size = new System.Drawing.Size(196, 21);
+            this.cboCaptureType.Size = new System.Drawing.Size(260, 24);
             this.cboCaptureType.TabIndex = 13;
+            this.cboCaptureType.SelectedIndexChanged += new System.EventHandler(this.cboCaptureType_SelectedIndexChanged);
             // 
             // lblCaptureType
             // 
             this.lblCaptureType.AutoSize = true;
-            this.lblCaptureType.Location = new System.Drawing.Point(12, 83);
+            this.lblCaptureType.Location = new System.Drawing.Point(16, 73);
+            this.lblCaptureType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCaptureType.Name = "lblCaptureType";
-            this.lblCaptureType.Size = new System.Drawing.Size(71, 13);
+            this.lblCaptureType.Size = new System.Drawing.Size(89, 16);
             this.lblCaptureType.TabIndex = 12;
             this.lblCaptureType.Text = "Capture Type";
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(479, 19);
+            this.btnRefresh.Location = new System.Drawing.Point(639, 23);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(55, 24);
+            this.btnRefresh.Size = new System.Drawing.Size(73, 30);
             this.btnRefresh.TabIndex = 11;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
@@ -182,18 +188,20 @@
             // lblPort
             // 
             this.lblPort.AutoSize = true;
-            this.lblPort.Location = new System.Drawing.Point(10, 22);
+            this.lblPort.Location = new System.Drawing.Point(13, 27);
+            this.lblPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPort.Name = "lblPort";
-            this.lblPort.Size = new System.Drawing.Size(26, 13);
+            this.lblPort.Size = new System.Drawing.Size(31, 16);
             this.lblPort.TabIndex = 10;
             this.lblPort.Text = "Port";
             // 
             // btnClose
             // 
             this.btnClose.Enabled = false;
-            this.btnClose.Location = new System.Drawing.Point(422, 19);
+            this.btnClose.Location = new System.Drawing.Point(563, 23);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(51, 23);
+            this.btnClose.Size = new System.Drawing.Size(68, 28);
             this.btnClose.TabIndex = 9;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -201,9 +209,10 @@
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(363, 18);
+            this.btnOpen.Location = new System.Drawing.Point(484, 22);
+            this.btnOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(53, 23);
+            this.btnOpen.Size = new System.Drawing.Size(71, 28);
             this.btnOpen.TabIndex = 8;
             this.btnOpen.Text = "Open";
             this.btnOpen.UseVisualStyleBackColor = true;
@@ -213,88 +222,112 @@
             // 
             this.cboPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPort.FormattingEnabled = true;
-            this.cboPort.Location = new System.Drawing.Point(42, 19);
+            this.cboPort.Location = new System.Drawing.Point(56, 23);
+            this.cboPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboPort.Name = "cboPort";
-            this.cboPort.Size = new System.Drawing.Size(303, 21);
+            this.cboPort.Size = new System.Drawing.Size(403, 24);
             this.cboPort.TabIndex = 7;
             // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.lblReadings);
-            this.splitContainer2.Panel1.Controls.Add(this.txtReadings);
+            this.splitContainer2.Panel1.Controls.Add(this.lstReadings);
+            this.splitContainer2.Panel1.Controls.Add(this.statusStrip1);
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.lblOutput);
             this.splitContainer2.Panel2.Controls.Add(this.txtOutput);
-            this.splitContainer2.Size = new System.Drawing.Size(800, 303);
-            this.splitContainer2.SplitterDistance = 131;
+            this.splitContainer2.Panel2.Controls.Add(this.statusStrip2);
+            this.splitContainer2.Size = new System.Drawing.Size(1075, 379);
+            this.splitContainer2.SplitterDistance = 175;
+            this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 0;
             // 
-            // lblReadings
+            // lstReadings
             // 
-            this.lblReadings.AutoSize = true;
-            this.lblReadings.Location = new System.Drawing.Point(12, 8);
-            this.lblReadings.Name = "lblReadings";
-            this.lblReadings.Size = new System.Drawing.Size(52, 13);
-            this.lblReadings.TabIndex = 1;
-            this.lblReadings.Text = "Readings";
+            this.lstReadings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstReadings.FormattingEnabled = true;
+            this.lstReadings.ItemHeight = 16;
+            this.lstReadings.Location = new System.Drawing.Point(0, 26);
+            this.lstReadings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lstReadings.Name = "lstReadings";
+            this.lstReadings.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstReadings.Size = new System.Drawing.Size(1075, 149);
+            this.lstReadings.TabIndex = 2;
             // 
-            // txtReadings
+            // statusStrip1
             // 
-            this.txtReadings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtReadings.Location = new System.Drawing.Point(3, 31);
-            this.txtReadings.Multiline = true;
-            this.txtReadings.Name = "txtReadings";
-            this.txtReadings.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtReadings.Size = new System.Drawing.Size(797, 100);
-            this.txtReadings.TabIndex = 0;
+            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 0);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1075, 26);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // lblOutput
+            // toolStripStatusLabel1
             // 
-            this.lblOutput.AutoSize = true;
-            this.lblOutput.Location = new System.Drawing.Point(12, 12);
-            this.lblOutput.Name = "lblOutput";
-            this.lblOutput.Size = new System.Drawing.Size(39, 13);
-            this.lblOutput.TabIndex = 2;
-            this.lblOutput.Text = "Output";
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(135, 20);
+            this.toolStripStatusLabel1.Text = "Captured Readings";
             // 
             // txtOutput
             // 
-            this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOutput.Location = new System.Drawing.Point(0, 39);
+            this.txtOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtOutput.Location = new System.Drawing.Point(0, 0);
+            this.txtOutput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtOutput.Size = new System.Drawing.Size(800, 129);
+            this.txtOutput.Size = new System.Drawing.Size(1075, 173);
             this.txtOutput.TabIndex = 1;
+            // 
+            // statusStrip2
+            // 
+            this.statusStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel2});
+            this.statusStrip2.Location = new System.Drawing.Point(0, 173);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
+            this.statusStrip2.Size = new System.Drawing.Size(1075, 26);
+            this.statusStrip2.TabIndex = 2;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(112, 20);
+            this.toolStripStatusLabel2.Text = "Arduino Output";
             // 
             // serialPort
             // 
             this.serialPort.BaudRate = 115200;
-            this.serialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort_DataReceived);
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1075, 489);
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Record Serial Data";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -308,6 +341,10 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -316,9 +353,6 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.Label lblReadings;
-        private System.Windows.Forms.TextBox txtReadings;
-        private System.Windows.Forms.Label lblOutput;
         private System.Windows.Forms.TextBox txtOutput;
         private System.IO.Ports.SerialPort serialPort;
         private System.Windows.Forms.GroupBox grpSettings;
@@ -327,13 +361,17 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.ComboBox cboPort;
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnCapture;
         private System.Windows.Forms.ComboBox cboCaptureType;
         private System.Windows.Forms.Label lblCaptureType;
         private System.Windows.Forms.Button btnSaveReadings;
         private System.Windows.Forms.TextBox txtAvgs;
         private System.Windows.Forms.Label lblAvgs;
+        private System.Windows.Forms.ListBox lstReadings;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
     }
 }
 
